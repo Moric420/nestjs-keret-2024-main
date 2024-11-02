@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <title>Szabadság igénylés</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/public/main.css">
+
+
+</head>
+<body>
+  <div class="container mt-5">
+    <h1>Szabadság igénylés</h1>
+    <% if (errorMessage) { %>
+      <div class="alert alert-danger"><%= errorMessage %></div>
+    <% } %>
+
+    <form action="/vacation/request" method="POST">
+      <div class="form-group">
+        <label for="name">Név</label>
+        <input type="text" class="form-control" id="name" name="name" required value="<%= formData.name || '' %>">
+      </div>
+      <div class="form-group">
+        <label for="startDate">Kezdő dátum</label>
+        <input type="date" class="form-control" id="startDate" name="startDate" required value="<%= formData.startDate || '' %>">
+      </div>
+      <div class="form-group">
+        <label for="endDate">Vég dátum</label>
+        <input type="date" class="form-control" id="endDate" name="endDate" required value="<%= formData.endDate || '' %>">
+      </div>
+      <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input" id="isPaidLeave" name="isPaidLeave" <%= formData.isPaidLeave ? 'checked' : '' %>>
+        <label class="form-check-label" for="isPaidLeave">Fizetett szabadság</label>
+      </div>
+      <div class="form-group">
+        <label for="employeeId">Alkalmazott azonosító (BBB-SSS)</label>
+        <input type="text" class="form-control" id="employeeId" name="employeeId" required value="<%= formData.employeeId || '' %>">
+      </div>
+      <div class="form-group">
+        <label for="justification">Indoklás</label>
+        <textarea class="form-control" id="justification" name="justification" minlength="30" required><%= formData.justification || '' %></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Igénylés leadása</button>
+    </form>
+  </div>
+</body>
+</html>
